@@ -1,0 +1,27 @@
+def golangci_lint_binary(name, version, hashes=None, deps=None, visibility=None):
+    """Downloads a precompiled golangci-lint binary.
+
+    Args:
+      name (str): Name of the rule
+      version (str): Version of golangci-lint to download (e.g. '1.27.0').
+      hashes (list): Hashes to verify the download against.
+      deps (list): Any other dependencies
+      visibility (list): Visibility of the rule.
+    """
+    download_rule = remote_file(
+        name = name,
+        _tag = 'download',
+        url = f'https://github.com/golangci/golangci-lint/releases/download/v{version}/golangci-lint-{version}-$OS-$ARCH.tar.gz',
+        out = f'golangci-lint-{version}.tar.gz',
+        hashes = hashes,
+        deps = deps,
+    )
+    return genrule(
+        name = name,
+        srcs = [download_rule],
+        outs = ['golangci-lint'],
+        tools = [CONFIG.JARCAT_TOOL],
+        binary = True,
+        cmd = '$TOOL x $SRCS golangci-lint -o tmp && mv $(find tmp -name "golangci-lint") $OUT',
+        visibility = visibility,
+    )
