@@ -6,7 +6,7 @@
 
 Add the following to `BUILD` in your project root:
 
-```skylark
+```starlark
 github_repo(
     name = "please-go",
     repo = "sagikazarmark/please-go",
