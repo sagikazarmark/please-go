@@ -1,3 +1,5 @@
+CONFIG.setdefault('GOLANGCI_LINT_TOOL', '//third_party/golangci-lint')
+
 _golangci_lint_tool = check_config(key='GOLANGCI_LINT_TOOL', example='path/to/golangci-lint')
 
 sh_cmd(

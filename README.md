@@ -17,37 +17,29 @@ github_repo(
 
 ### GolangCI lint
 
-Add the following to your root `.plzconfig` file:
+GolangCI can be executed out of the box using `plz run`:
 
-```
-[buildconfig]
-golangci-lint-tool = ///please-go//third_party:golangci-lint
-```
-
-Then run `plz run ///please-go//tools:golangci-lint`.
-
-You can also pin the project to a specific version, which is optional, but strongly recommended:
-
-```
-[buildconfig]
-; ...
-golangci-lint-version = 1.27.0
+```bash
+plz run ///please-go//tools/golangci-lint
 ```
 
-Defining an [alias](https://please.build/config.html) is usually also a good idea:
+Defining an [alias](https://please.build/config.html) makes the command shorter and easier to memorize:
 
 ```
 [alias "lint"]
 desc = Runs the linters for this repo
-cmd = run ///please-go//tools:golangci-lint --
+cmd = run ///please-go//tools/golangci-lint --
 ```
 
 Then you can just run the linter by executing `plz lint`. It also passes arguments to the `golangci-lint run` command,
 so for example `plz lint -v` will run the linter in verbose mode.
 
-If you already have GolangCI installed somewhere, you can use it by specifying the path to the executable:
+The build target installs GolangCI lint by default. You can customize the installation using the following configuration in `.plzconfig`:
 
 ```
 [buildconfig]
-golangci-lint-tool = path/to/golangci-lint
+golangci-lint-tool = ///please-go//third_party/golangci-lint
+golangci-lint-version = 1.27.0
 ```
+
+Pinning the linter version is optional, but strongly recommended.

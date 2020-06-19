@@ -1,0 +1,2 @@
+[buildconfig]
+#golangci-lint-tool = golangci-lint
