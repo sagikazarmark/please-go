@@ -11,7 +11,7 @@ def golangci_lint_binary(name, version, hashes=None, deps=None, visibility=None)
     download_rule = remote_file(
         name = name,
         _tag = 'download',
-        url = f'https://github.com/golangci/golangci-lint/releases/download/v{version}/golangci-lint-{version}-$OS-$ARCH.tar.gz',
+        url = f'https://github.com/golangci/golangci-lint/releases/download/v{version}/golangci-lint-{version}-${OS}-${ARCH}.tar.gz',
         out = f'golangci-lint-{version}.tar.gz',
         hashes = hashes,
         deps = deps,

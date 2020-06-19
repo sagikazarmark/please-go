@@ -1,0 +1,27 @@
+def mga_binary(name, version, hashes=None, deps=None, visibility=None):
+    """Downloads a precompiled mga binary.
+
+    Args:
+      name (str): Name of the rule
+      version (str): Version of mga to download (e.g. '0.2.0').
+      hashes (list): Hashes to verify the download against.
+      deps (list): Any other dependencies
+      visibility (list): Visibility of the rule.
+    """
+    download_rule = remote_file(
+        name = name,
+        _tag = 'download',
+        url = f'https://github.com/sagikazarmark/mga/releases/download/v{version}/mga_${OS}_${ARCH}.tar.gz',
+        out = f'mga-{version}.tar.gz',
+        hashes = hashes,
+        deps = deps,
+    )
+    return genrule(
+        name = name,
+        srcs = [download_rule],
+        outs = ['mga'],
+        tools = [CONFIG.JARCAT_TOOL],
+        binary = True,
+        cmd = '$TOOL x $SRCS mga -o tmp && mv $(find tmp -name "mga") $OUT',
+        visibility = visibility,
+    )
