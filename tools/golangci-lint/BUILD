@@ -6,4 +6,5 @@ sh_cmd(
     name = 'golangci-lint',
     srcs = [_golangci_lint_tool],
     cmd = f'exec $(out_location {_golangci_lint_tool}) run \\\${@}'
+    visibility = ["PUBLIC"],
 )

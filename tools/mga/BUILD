@@ -6,4 +6,5 @@ sh_cmd(
     name = 'mga',
     srcs = [_mga_tool],
     cmd = f'exec $(out_location {_mga_tool}) \\\${@}'
+    visibility = ["PUBLIC"],
 )
