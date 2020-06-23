@@ -33,12 +33,12 @@ def go_build(name:str, srcs:list=[], out:str=None, deps:list=[], visibility:list
         tools = tools,
         pass_env = ['GOCACHE', 'GOPATH', 'GOFLAGS'] + pass_env,
         building_description = 'Compiling...',
-        needs_transitive_deps=True,
-        binary=True,
-        output_is_complete=True,
-        test_only=test_only,
-        visibility=visibility,
-        requires=['go'],
+        needs_transitive_deps = True,
+        binary = True,
+        output_is_complete = True,
+        test_only = test_only,
+        visibility = visibility,
+        requires = ['go'],
         stamp = stamp,
     )
 
