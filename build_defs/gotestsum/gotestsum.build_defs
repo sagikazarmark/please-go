@@ -1,0 +1,27 @@
+def gotestsum_binary(name:str, version:str, hashes:list=None, deps:list=None, visibility:list=CONFIG.DEFAULT_VISIBILITY):
+    """Downloads a precompiled gotestsum binary.
+
+    Args:
+      name (str): Name of the rule.
+      version (str): Version of gotestsum to download (e.g. '0.5.1').
+      hashes (list): Hashes to verify the download against.
+      deps (list): Dependencies
+      visibility (list): Visibility of the rule.
+    """
+    download_rule = remote_file(
+        name = name,
+        _tag = 'download',
+        url = f'https://github.com/gotestyourself/gotestsum/releases/download/v{version}/gotestsum_{version}_${OS}_${ARCH}.tar.gz',
+        out = f'gotestsum-{version}.tar.gz',
+        hashes = hashes,
+        deps = deps,
+    )
+    return genrule(
+        name = name,
+        srcs = [download_rule],
+        outs = ['gotestsum'],
+        tools = [CONFIG.JARCAT_TOOL],
+        binary = True,
+        cmd = '$TOOL x $SRCS gotestsum -o tmp && mv $(find tmp -name "gotestsum") $OUT',
+        visibility = visibility,
+    )
