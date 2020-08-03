@@ -1,3 +1,8 @@
+> # ⚠ Project moved
+> The contents of this project has been moved to a new repository: https://github.com/sagikazarmark/mypleasings
+>
+> This repository will stay here to provide backward compatibility, but it won't receive any updates. Please follow the new repositories.
+
 # [Please](https://please.build) Go rules and definitions
 
 **Note:** This is still very much **experimental**, but [please](https://please.build) looks like a great alternative to [make](https://en.wikipedia.org/wiki/Make_(software)), I love it.
